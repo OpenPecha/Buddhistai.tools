@@ -69,7 +69,7 @@ const Hero = () => {
            {/* Gradient blob for glowing light effect behind laptop */}
            <div className="gradient-light-blob"></div>
           
-           <img src="/img/macframe.png" alt="MacBook frame showcasing the platform" className="w-full h-auto object-contain drop-shadow-2xl relative z-10" />
+           <img src="/img/macframe.png" alt="MacBook frame showcasing the platform" className="w-[90%] mx-auto h-auto object-contain drop-shadow-2xl relative z-10" />
            
            {/* Diverse Floating Elements - Scattered Design - Hidden on mobile */}
            <div className="absolute inset-0 pointer-events-none hidden lg:block">
