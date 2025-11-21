@@ -4,9 +4,9 @@ const visionPosts = [
   {
     icon: Target,
     title: "Our Mission",
-    author: "Ngawang Thinley",
-    role: "OpenPecha Founder",
-    avatar: "https://picsum.photos/40/40?random=10",
+    author: "Tenzin Tsering",
+    role: "Software Engineer",
+    avatar: "https://dharmaduta.in/team/pecha_server/tentse.png",
     timeAgo: "2h",
     likes: 127,
     comments: 23,
