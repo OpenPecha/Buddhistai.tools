@@ -121,20 +121,7 @@ const VisionSection = () => {
 
                   {/* Engagement section */}
                   <div className="relative z-10 flex items-center justify-between pt-3 border-t border-neutral-200/50 dark:border-neutral-700/50">
-                    <div className="flex items-center gap-4">
-                      <button className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs">
-                        <ThumbsUp className="h-4 w-4" />
-                        <span>{post.likes}</span>
-                      </button>
-                      <button className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs">
-                        <MessageCircle className="h-4 w-4" />
-                        <span>{post.comments}</span>
-                      </button>
-                      <button className="flex items-center gap-1 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-xs">
-                        <Share2 className="h-4 w-4" />
-                        <span>Share</span>
-                      </button>
-                    </div>
+                    
                     
                     {/* Category badge */}
                     <div className="text-xs bg-primary-100/60 dark:bg-primary-400/30 text-primary-700 dark:text-primary-300 px-2 py-1 rounded-full font-medium">
