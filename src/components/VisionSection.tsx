@@ -114,7 +114,7 @@ const VisionSection = () => {
 
                   {/* Post content */}
                   <div className="relative z-10 mb-4">
-                    <p className="text-sm text-neutral-900 dark:text-neutral-100 leading-relaxed">
+                    <p className="text-sm text-neutral-900 dark:text-neutral-400 leading-relaxed">
                       {post.description}
                     </p>
                   </div>

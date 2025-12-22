@@ -7,7 +7,6 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import { UserbackProvider } from '@/components/UserbackProvider';
 import Script from 'next/script';
 const userbackId = process.env.USERBACK_ID||"";
-import { ReactLenis } from '@/lib/lenis';
 
 export const metadata: Metadata = {
   title: DEFAULT_SEO_METADATA.title,
@@ -45,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className='dark'>
       <head>
         {/* Google Tag Manager */}
         <Script id="google-tag-manager">
@@ -66,7 +65,6 @@ export default function RootLayout({
         />
  
       </head>
-      <ReactLenis root>
 
       <body>
         {/* Google Tag Manager (noscript) */}
@@ -82,14 +80,28 @@ export default function RootLayout({
         {/* End Google Tag Manager (noscript) */}
         <UserProvider>
           <UserbackProvider userbackId={userbackId}>
-
           <ClientWrapper>
+          <div className="min-h-screen w-full bg-black relative">
+  <div
+    className="absolute inset-0 z-0"
+    style={{
+      background: "#000000",
+      backgroundImage: `
+        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px),
+        radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)
+      `,
+      backgroundSize: "20px 20px, 20px 20px, 20px 20px",
+      backgroundPosition: "0 0, 0 0, 0 0",
+      opacity: 0.1,
+    }}
+  />
             {children}
+</div>
           </ClientWrapper>
           </UserbackProvider>
         </UserProvider>
       </body>
-      </ReactLenis>
 
     </html>
   )

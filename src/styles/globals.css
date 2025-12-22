@@ -131,40 +131,11 @@ body {
   animation: light-glow 8s ease-in-out infinite;
 }
 
-/* Additional glow layers for enhanced light effect */
-.gradient-light-blob::before {
-  content: '';
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  bottom: 10%;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 255, 255, 0.15) 0%,
-    rgba(99, 102, 241, 0.2) 30%,
-    transparent 70%
-  );
-  filter: blur(20px);
-  animation: light-pulse 6s ease-in-out infinite;
+
+.desc_style{
+  color:#888;
 }
 
-.gradient-light-blob::after {
-  content: '';
-  position: absolute;
-  top: 20%;
-  left: 20%;
-  right: 20%;
-  bottom: 20%;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(139, 92, 246, 0.15) 40%,
-    transparent 80%
-  );
-  filter: blur(15px);
-  animation: light-shimmer 10s ease-in-out infinite reverse;
-}
 
 /* Keyframes for light animations */
 @keyframes light-glow {
@@ -329,25 +300,4 @@ body {
   }
 }
 
-/* lenis */
 
-html.lenis,
-html.lenis body{
-height: auto;
-}
-
-.lenis.lenis-smooth{
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent]{
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped{
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe{
- pointer-events: none;
-}

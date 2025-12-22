@@ -71,7 +71,7 @@ const Header: React.FC = () => {
           </nav>
           
           {/* Theme Toggle */}
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
@@ -82,7 +82,7 @@ const Header: React.FC = () => {
             ) : (
               <Sun className="h-5 w-5" />
             )}
-          </button>
+          </button> */}
           
           {user ? (
             <div className="flex items-center gap-3 relative" ref={dropdownRef}>
@@ -134,7 +134,7 @@ const Header: React.FC = () => {
         {/* Mobile Hamburger Menu */}
         <div className="flex md:hidden items-center gap-2">
           {/* Mobile Theme Toggle */}
-          <button
+          {/* <button
             onClick={toggleTheme}
             className="p-2 text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800"
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
@@ -145,7 +145,7 @@ const Header: React.FC = () => {
             ) : (
               <Sun className="h-5 w-5" />
             )}
-          </button>
+          </button> */}
           
           <button
             onClick={() => setShowMobileMenu(!showMobileMenu)}

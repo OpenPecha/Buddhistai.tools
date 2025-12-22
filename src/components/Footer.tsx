@@ -6,7 +6,7 @@ interface FooterProps {
 
 const Footer = ({ className = "" }: FooterProps) => {
   return (
-    <footer className={` bg-primary-300 dark:bg-primary-900 text-neutral-800 dark:text-neutral-200 from-primary/90 via-secondary/90 to-primary/90  py-8 ${className}`}>
+    <footer className={`  text-neutral-800 dark:text-neutral-400 from-primary/90 via-secondary/90 to-primary/90  py-8 ${className}`}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Logo and Description */}
@@ -136,14 +136,11 @@ const Footer = ({ className = "" }: FooterProps) => {
             <div className="flex items-center space-x-6 text-sm /60">
               <span>Made with</span>
               <Heart className="h-4 w-4 text-red-400" />
-              <span>and AI for all beings</span>
-            </div>
-          </div>
-          <div className="mt-4 text-xs /50">
-            <p>
+              <span>
               Some tools utilize artificial intelligence to enhance manuscript
               processing and analysis capabilities.
-            </p>
+            </span>
+            </div>
           </div>
         </div>
       </div>
