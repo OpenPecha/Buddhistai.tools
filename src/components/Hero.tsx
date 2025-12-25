@@ -58,7 +58,7 @@ const TypewriterText = () => {
 const Hero = () => {
   return (
       <section
-        className="relative hidden md:flex md:min-h-screen   flex-col bg-transparent "
+        className="relative hidden md:flex md:min-h-screen   flex-col bg-transparent pt-20 "
         aria-labelledby="hero-heading"
               >
         <div className="flex flex-col text-center mt-12 gap-4 relative z-10 px-4">
