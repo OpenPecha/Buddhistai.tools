@@ -1,14 +1,16 @@
-import "server-only";
-import { Claims, getSession } from "@auth0/nextjs-auth0";
+"use server";
+import {db} from '@/lib/prisma'
+import { auth0 } from "@/lib/auth0";
+export const getUserProfile = async (): Promise<any> => {
+  const session = await auth0.getSession();
 
-export const getUserProfileData = async (): Promise<Claims> => {
-  const session = await getSession();
-
-  if (!session) {
-    throw new Error(`Requires authentication`);
+  const user=await db.user.findUnique({
+    where: {
+      id: session?.user?.sub,
+    },
+  });
+  if (!user) {
+    throw new Error(`User not found`);
   }
-
-  const { user } = session;
-
   return user;
 };
