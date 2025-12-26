@@ -251,10 +251,6 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
       className="py-12 sm:py-16 md:py-20 text-neutral-900 dark:text-neutral-100"
       aria-labelledby="tools-heading"
     >
-      {/* Background decoration */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/20 via-transparent to-purple-100/20"></div>
-      <div className="absolute top-0 right-0 w-72 h-72 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-purple-100/30 to-blue-100/30 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
           <header className="text-center mb-12 sm:mb-16 md:mb-20">

@@ -110,7 +110,7 @@ const Header: React.FC = () => {
                     Profile
                   </Link>
                   <a
-                    href="/api/auth/logout"
+                    href="/auth/logout"
                     className="px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors duration-200 flex items-center space-x-2 mx-2 mt-1"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
             </div>
           ) : (
             <a
-              href="/api/auth/login"
+              href="/auth/login"
               className=" bg-primary-200 dark:bg-primary-800 px-2 py-1 rounded-md text-primary-800 dark:text-neutral-300 hover:text-primary-700 dark:hover:text-primary-300"
             >
               Sign in
@@ -203,7 +203,7 @@ const Header: React.FC = () => {
                     Profile
                   </Link>
                   <a
-                    href="/api/auth/logout"
+                    href="/auth/logout"
                     className="w-full text-left px-3 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors duration-200 flex items-center space-x-2"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -234,7 +234,7 @@ const Header: React.FC = () => {
                 </div>
                 
                 <a
-                  href="/api/auth/login"
+                  href="/auth/login"
                   className="w-full px-4 py-3 text-center font-bold text-primary-600 dark:text-neutral-300 hover:bg-primary-600 dark:hover:bg-primary-600 hover:text-neutral-50 border border-primary-600 dark:border-primary-400 rounded-md transition-colors duration-200 block"
                 >
                   Sign in

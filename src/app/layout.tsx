@@ -3,7 +3,7 @@ import { DEFAULT_SEO_METADATA } from '@/lib/seoMetadata';
 import ClientWrapper from '@/components/ClientWrapper';
 import "@/styles/globals.css";
 import "@/styles/tailwind.css";
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { Auth0Provider } from '@auth0/nextjs-auth0/client';
 import { UserbackProvider } from '@/components/UserbackProvider';
 import Script from 'next/script';
 const userbackId = process.env.USERBACK_ID||"";
@@ -80,14 +80,14 @@ export default function RootLayout({
           ></iframe>
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        <UserProvider>
+        <Auth0Provider>
           <UserbackProvider userbackId={userbackId}>
           <ClientWrapper>
           
             {children}
           </ClientWrapper>
           </UserbackProvider>
-        </UserProvider>
+        </Auth0Provider>
       </body>
 
     </html>

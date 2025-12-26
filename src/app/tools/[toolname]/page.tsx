@@ -1,9 +1,8 @@
 import { db } from '@/lib/prisma';
-import { getSession } from '@auth0/nextjs-auth0';
+import { auth0 } from "@/lib/auth0";
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { cookies } from 'next/headers';
 // Server-side function to get the tool URL
 async function getUrlFromMapping(email: string): Promise<string | undefined> {
     try {
@@ -88,10 +87,10 @@ interface PageProps {
 
 // Main Page Component (Server Component)
 export default async function ToolPage({ params }: PageProps) {
-  await cookies();
   const resolvedParams = await params;
   const toolname = decodeURIComponent(resolvedParams.toolname);
-  const session = await getSession();
+  
+  const session = await auth0.getSession();
   const user = session?.user;
 
   if (!user) {
