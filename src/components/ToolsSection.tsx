@@ -20,7 +20,7 @@ interface ToolCardProps {
   loginRequired?: boolean;
 }
 
-const LoginNotRequiredList = ['Challenge Us'];
+const LoginNotRequiredList = ['Arena','PDF cropper'];
 
 const ToolCard: React.FC<ToolCardProps> = ({
   title,
