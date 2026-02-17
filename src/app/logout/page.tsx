@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 
 function Page() {
     useEffect(()=>{
-        const url = '/api/auth/logout'
+        const url = '/auth/logout'
         redirect(url)
     },[])
   return (

@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 
 function Login() {
     useEffect(()=>{
-        const url = '/api/auth/login'
+        const url = '/auth/login'
         redirect(url)
     },[])
   return (

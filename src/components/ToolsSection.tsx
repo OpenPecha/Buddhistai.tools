@@ -44,7 +44,7 @@ const ToolCard: React.FC<ToolCardProps> = ({
     // If login is required, we handle navigation manually
     if (loginRequired) {
       e.preventDefault();
-      const redirectUrl = isAuthenticated ? path : "/api/auth/login";
+      const redirectUrl = isAuthenticated ? path : "/auth/login";
       window.location.href = redirectUrl;
     }
     // If login is not required, let the Link component handle navigation to href={path}
@@ -163,7 +163,7 @@ const OldToolCard: React.FC<OldToolCardProps> = ({
 
   const handleToolClick = async () => {
     if (!isAuthenticated) {
-      router.push('/api/auth/login');
+      router.push('/auth/login');
       return;
     }
 
