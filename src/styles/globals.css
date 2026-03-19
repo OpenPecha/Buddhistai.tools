@@ -102,33 +102,25 @@ body {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Gradient Light Blob - Glowing effect behind laptop */
+/* Gradient Light Blob - Warm, contemplative glow behind hero */
 .gradient-light-blob {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 1200px;
-  height: 900px;
+  width: 1000px;
+  height: 800px;
   transform: translate(-50%, -50%);
   z-index: 1;
-  
-  /* Multi-layered gradient for realistic light effect */
   background: radial-gradient(
-    ellipse 80% 60% at center,
-    rgba(99, 102, 241, 0.4) 0%,
-    rgba(139, 92, 246, 0.3) 20%,
-    rgba(59, 130, 246, 0.25) 40%,
-    rgba(6, 182, 212, 0.15) 60%,
-    rgba(16, 185, 129, 0.1) 80%,
-    transparent 100%
+    ellipse 75% 55% at center,
+    rgba(217, 119, 6, 0.18) 0%,
+    rgba(180, 83, 9, 0.12) 25%,
+    rgba(20, 184, 166, 0.08) 50%,
+    transparent 75%
   );
-  
-  /* Glow effect with multiple shadows */
-  filter: blur(40px);
-  opacity: 0.8;
-  
-  /* Gentle floating animation */
-  animation: light-glow 8s ease-in-out infinite;
+  filter: blur(60px);
+  opacity: 0.9;
+  animation: light-glow 10s ease-in-out infinite;
 }
 
 

@@ -9,9 +9,10 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  return (<div className="flex flex-col min-h-screen relative ">
+  return (
+    <div className="flex flex-col min-h-screen relative bg-[var(--page-bg)]">
       <Header />
-      <main className="grow relative z-10  ">
+      <main className="grow relative z-10">
         {children}
       </main>
       <Footer className="relative z-10" />

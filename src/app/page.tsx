@@ -73,25 +73,21 @@ export default async function Home() {
 
   return (
     <Layout>
-      <div className="min-h-screen w-full bg-black relative">
-  <div
-    className="absolute inset-0 z-0"
-    style={{
-      background: "#000000",
-      backgroundImage: `
-        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px),
-        radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)
-      `,
-      backgroundSize: "20px 20px, 20px 20px, 20px 20px",
-      backgroundPosition: "0 0, 0 0, 0 0",
-      opacity: 0.1,
-    }}
-  />
+      <div className="min-h-screen w-full bg-[var(--page-bg)] relative">
+        <div
+          className="absolute inset-0 z-0 pointer-events-none"
+          aria-hidden
+          style={{
+            backgroundImage: `
+              radial-gradient(ellipse 80% 50% at 50% 0%, rgba(217,119,6,0.06) 0%, transparent 55%),
+              linear-gradient(to bottom, transparent 0%, var(--page-bg) 100%)
+            `,
+          }}
+        />
         <Hero />
         <ToolsSection tools={tools} oldTools={oldTools} />
         <VisionSection />
-</div>
+      </div>
     </Layout>
   );
 }
