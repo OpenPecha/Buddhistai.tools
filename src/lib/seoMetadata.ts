@@ -51,7 +51,7 @@ export const CORE_KEYWORDS = [
 
 // Base site information
 export const SITE_INFO = {
-  name: 'Buddhist AI Studio',
+  name: 'WeBuddhist AI Studio',
   url: 'https://studio.pecha.ai',
   description: 'A comprehensive collection of AI tools for modern Buddhist text collection, translation, and preservation. Specialized platform for Pecha Tibetan manuscripts, ancient Buddhist scriptures, and Dharma text processing.',
   logo: '/icon_logo.png',
