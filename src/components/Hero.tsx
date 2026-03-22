@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
-const WORDS = ["Wisdom", "Knowledge", "Heritage", "Teachings", "Scriptures", "Manuscripts", "Texts", "Pecha", "Buddhism", "Annotation"] as const;
+const WORDS = ["Wisdom", "Knowledge", "OCR", "Teachings", "Scriptures", "Manuscripts", "Texts", "Pecha", "Buddhism", "Annotation"] as const;
 
 const TypewriterText = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -64,23 +64,21 @@ const Hero = () => {
         <ContainerScroll
           titleComponent={
             <>
-              <p className="text-sm font-medium uppercase tracking-widest text-[var(--muted-foreground)] mb-2">
-                AI-Enhanced Buddhist Manuscript Tools
-              </p>
+            <TypewriterText />
+             
               <h1
                 id="hero-heading"
-                className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[var(--foreground)]"
+                className="text-4xl flex justify-center items-end font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-[var(--foreground)]"
               >
-                Building Buddhist AI. <br />
-                <span className="text-4xl md:text-[5rem] font-bold mt-1 leading-none text-[var(--primary)]">
-                  Together
-                </span>
+                Building Buddhist AI.   
+                
+               
               </h1>
               <p className="text-lg sm:text-xl text-[var(--muted-foreground)] max-w-2xl mx-auto mt-4 leading-relaxed">
                 Preserving wisdom through technology—tools for translation, annotation, and study.
               </p>
               <div className="mt-6">
-                {/* <TypewriterText /> */}
+            
               </div>
             </>
           }
