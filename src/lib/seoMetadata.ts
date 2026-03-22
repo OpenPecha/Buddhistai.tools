@@ -22,6 +22,13 @@ export interface SEOMetadata {
 
 // Core keywords for the Buddhist AI platform
 export const CORE_KEYWORDS = [
+  "webuddhist",
+  "we buddhist",
+  "webuddhist ai",
+  "webuddhist ai studio",
+  "webuddhist ai tools",
+  "we buddhist ai tool",
+  "WeBuddhist text collection",
   'AI Buddhist',
   'Pecha Tibetan text',
   'Buddhist manuscripts',
