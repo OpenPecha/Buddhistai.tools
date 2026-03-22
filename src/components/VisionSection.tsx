@@ -1,7 +1,9 @@
 "use client";
-import { Users, MessageCircle, ThumbsUp } from "lucide-react";
-import { CircularTestimonials } from "@/components/ui/circular-testimonials";
-import type { Testimonial } from "@/components/ui/circular-testimonials";
+
+import { MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
+import type { TestimonialColumnItem } from "@/components/ui/testimonials-columns-1";
 
 const visionPosts: Array<{
   title: string;
@@ -44,25 +46,54 @@ const visionPosts: Array<{
   },
 ];
 
-const visionTestimonials: Testimonial[] = visionPosts.map((p) => ({
-  quote: p.description,
+const visionTestimonials: TestimonialColumnItem[] = visionPosts.map((p) => ({
+  text: p.description,
+  image: p.avatar,
   name: p.author,
-  designation: p.role,
-  src: p.avatar,
+  role: p.role,
 }));
+
+// Cycle through 4 items to fill 3 columns of 3 for seamless scrolling
+const firstColumn = [
+  visionTestimonials[0],
+  visionTestimonials[1],
+  visionTestimonials[2],
+];
+const secondColumn = [
+  visionTestimonials[3],
+  visionTestimonials[0],
+  visionTestimonials[1],
+];
+const thirdColumn = [
+  visionTestimonials[2],
+  visionTestimonials[3],
+  visionTestimonials[0],
+];
 
 const VisionSection = () => {
   return (
     <section
       id="vision"
-      className="py-16 md:py-24 relative overflow-hidden"
+      className="py-16 md:py-24 relative overflow-hidden bg-[var(--background)]"
       aria-labelledby="vision-heading"
     >
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl bg-[var(--primary)]/10 pointer-events-none" aria-hidden />
-      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl bg-[var(--secondary)]/10 pointer-events-none" aria-hidden />
+      <div
+        className="absolute top-0 right-0 w-80 h-80 rounded-full blur-3xl bg-[var(--primary)]/10 pointer-events-none"
+        aria-hidden
+      />
+      <div
+        className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl bg-[var(--secondary)]/10 pointer-events-none"
+        aria-hidden
+      />
 
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
-        <header className="text-center mb-12 md:mb-14">
+      <div className="container relative z-10 mx-auto px-4 max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center max-w-[540px] mx-auto mb-12 md:mb-14"
+        >
           <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)]/50 px-4 py-2 text-sm font-medium text-[var(--muted-foreground)] mb-5">
             <MessageCircle className="h-4 w-4 text-[var(--primary)]" />
             Community Voices
@@ -73,65 +104,27 @@ const VisionSection = () => {
           >
             What Our Team Says
           </h2>
-          <p className="text-[var(--muted-foreground)] text-lg max-w-2xl mx-auto">
+          <p className="text-[var(--muted-foreground)] text-lg text-center">
             From our founders and team on mission, values, and vision.
           </p>
-        </header>
+        </motion.div>
 
-        <div className="flex flex-wrap items-center justify-center relative max-w-[1456px] mx-auto">
-          <CircularTestimonials
-            testimonials={visionTestimonials}
-            autoplay={true}
-            colors={{
-              name: "var(--foreground)",
-              designation: "var(--muted-foreground)",
-              testimony: "var(--foreground)",
-              arrowBackground: "var(--primary)",
-              arrowForeground: "var(--primary-foreground)",
-              arrowHoverBackground: "var(--primary)",
-            }}
-            fontSizes={{
-              name: "1.75rem",
-              designation: "0.925rem",
-              quote: "1.125rem",
-            }}
+        <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] max-h-[740px] overflow-hidden">
+          <TestimonialsColumn testimonials={firstColumn} duration={15} />
+          <TestimonialsColumn
+            testimonials={secondColumn}
+            className="hidden md:block"
+            duration={19}
+          />
+          <TestimonialsColumn
+            testimonials={thirdColumn}
+            className="hidden lg:block"
+            duration={17}
           />
         </div>
-
-        <aside className="mt-12 md:mt-14" aria-labelledby="community-stats">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)]/80 backdrop-blur-sm p-6 text-center shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-[var(--muted)] flex items-center justify-center mx-auto mb-3 text-[var(--primary)]">
-                <ThumbsUp className="h-6 w-6" />
-              </div>
-              <div className="text-2xl font-bold text-[var(--foreground)] mb-1">2.4K+</div>
-              <div className="text-sm text-[var(--muted-foreground)]">Community Likes</div>
-            </div>
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)]/80 backdrop-blur-sm p-6 text-center shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-[var(--muted)] flex items-center justify-center mx-auto mb-3 text-[var(--primary)]">
-                <MessageCircle className="h-6 w-6" />
-              </div>
-              <div className="text-2xl font-bold text-[var(--foreground)] mb-1">589</div>
-              <div className="text-sm text-[var(--muted-foreground)]">Active Discussions</div>
-            </div>
-            <a
-              href="https://forum.openpecha.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-2xl border border-[var(--border)] bg-[var(--card)]/80 backdrop-blur-sm p-6 text-center shadow-sm hover:shadow-md hover:border-[var(--primary)]/30 transition-all duration-300 block"
-            >
-              <div className="w-12 h-12 rounded-xl bg-[var(--muted)] flex items-center justify-center mx-auto mb-3 text-[var(--primary)]">
-                <Users className="h-6 w-6" />
-              </div>
-              <div className="text-sm font-medium text-[var(--foreground)]">Join Discussion</div>
-              <div className="text-xs text-[var(--muted-foreground)] mt-1">Connect with our team</div>
-            </a>
-          </div>
-        </aside>
       </div>
     </section>
   );
 };
 
 export default VisionSection;
-

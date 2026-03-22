@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useMemo } from "react";
+import React from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { TransformedTool, TransformedOldTool } from "@/types/Tools";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useRouter } from "next/navigation";
-import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -19,119 +18,108 @@ function getCtaLabel(loginRequired: boolean, status: string, isAuthenticated: bo
   return isAuthenticated ? "Access Tool" : "Login to Access";
 }
 
-/** Icon component for BentoCard: shows tool icon image or Sparkles */
-function createToolIcon(iconUrl: string) {
-  return function ToolIcon({ className }: { className?: string }) {
-    return iconUrl ? (
-      <Image src={iconUrl} alt="" width={48} height={48} className={cn("h-12 w-12 object-contain", className)} />
-    ) : (
-      <Sparkles className={className} />
-    );
-  };
-}
-
-/** Subtle gradient background for bento cards */
-const BentoCardBackground = () => (
-  <div className="absolute inset-0 bg-gradient-to-br from-[var(--primary)]/8 via-transparent to-[var(--secondary)]/5" />
-);
-
-interface ToolBentoCardProps {
-  tool: TransformedTool;
+interface ToolCardProps {
+  title: string;
+  description: string;
+  icon?: string;
+  path: string;
   loginRequired: boolean;
+  status: string;
+  index: number;
+  badge?: string;
 }
 
-function ToolBentoCard({ tool, loginRequired }: ToolBentoCardProps) {
+function ToolCard({ title, description, icon, path, loginRequired, status, index, badge }: ToolCardProps) {
   const authUser = useUser();
-  const user = authUser?.user ?? null;
-  const isAuthenticated = !!user;
-  const isDisabled = tool.status !== "Available";
-  const path = tool.path ?? "#";
-
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (loginRequired) {
-      e.preventDefault();
-      window.location.href = isAuthenticated ? path : "/auth/login";
-    }
-  };
-
-  const cta = getCtaLabel(loginRequired, tool.status, isAuthenticated);
-  const Icon = useMemo(() => createToolIcon(tool.icon ?? ""), [tool.icon]);
-
-  const ctaContent = isDisabled ? (
-    <Button variant="ghost" size="sm" disabled>
-      {cta}
-    </Button>
-  ) : (
-    <Button variant="ghost" size="sm" asChild>
-      <Link href={path} onClick={handleClick} className="inline-flex items-center gap-2">
-        {cta}
-        <ArrowRight className="h-4 w-4" />
-      </Link>
-    </Button>
-  );
-
-  return (
-    <BentoCard
-      name={tool.title}
-      description={tool.description ?? ""}
-      href={path}
-      cta={cta}
-      Icon={Icon}
-      background={<BentoCardBackground />}
-      className="col-span-1"
-      ctaContent={ctaContent}
-      disabled={isDisabled}
-      badge={tool.status !== "Available" ? "Coming Soon" : undefined}
-    />
-  );
-}
-
-interface OldToolBentoCardProps {
-  tool: TransformedOldTool;
-  loginRequired: boolean;
-}
-
-function OldToolBentoCard({ tool, loginRequired }: OldToolBentoCardProps) {
-  const authUser = useUser();
-  const user = authUser?.user ?? null;
-  const isAuthenticated = !!user;
+  const isAuthenticated = !!authUser?.user;
   const router = useRouter();
-  const path = `/tools/${encodeURIComponent(tool.title)}`;
-  const isDisabled = false;
+  const isDisabled = status !== "Available";
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    if (!isAuthenticated) {
-      router.push("/auth/login");
+  const handleClick = (e: React.MouseEvent) => {
+    if (isDisabled) {
+      e.preventDefault();
       return;
     }
-    router.push(path);
+    if (loginRequired && !isAuthenticated) {
+      e.preventDefault();
+      router.push("/auth/login");
+    }
   };
 
-  const cta = getCtaLabel(loginRequired, "Available", isAuthenticated);
-  const Icon = useMemo(() => createToolIcon(tool.icon ?? ""), [tool.icon]);
+  const cta = getCtaLabel(loginRequired, status, isAuthenticated);
+  const href = isDisabled ? "#" : loginRequired && !isAuthenticated ? "/auth/login" : path;
 
-  const ctaContent = (
-    <Button variant="ghost" size="sm" asChild>
-      <Link href={path} onClick={handleClick} className="inline-flex items-center gap-2">
-        {cta}
-        <ArrowRight className="h-4 w-4" />
-      </Link>
-    </Button>
+  const content = (
+    <>
+      {index < 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-[var(--muted)]/50 to-transparent pointer-events-none" />
+      )}
+      {index >= 4 && (
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-[var(--muted)]/50 to-transparent pointer-events-none" />
+      )}
+      {badge && (
+        <span className="absolute top-4 right-4 z-20 rounded-full bg-[var(--muted)] px-2.5 py-1 text-xs font-medium text-[var(--muted-foreground)]">
+          {badge}
+        </span>
+      )}
+      <div className="mb-4 relative z-10 px-10 text-[var(--muted-foreground)]">
+        {icon ? (
+          <Image src={icon} alt="" width={32} height={32} className="h-8 w-8 object-contain text-[var(--primary)]" />
+        ) : (
+          <Sparkles className="h-8 w-8 text-[var(--primary)]" />
+        )}
+      </div>
+      <div className="text-lg font-bold mb-2 relative z-10 px-10">
+        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-[var(--muted)] group-hover/feature:bg-[var(--primary)] transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-[var(--foreground)]">
+          {title}
+        </span>
+      </div>
+      <p className="text-sm text-[var(--muted-foreground)] max-w-xs relative z-10 px-10 flex-1">
+        {description ?? "AI-powered tool for Buddhist studies."}
+      </p>
+      <div className="relative z-10 px-10 pt-4 min-h-[2rem]">
+        {isDisabled ? (
+          <Button variant="ghost" size="sm" disabled>
+            {cta}
+          </Button>
+        ) : loginRequired && !isAuthenticated ? (
+          <span className="relative inline-flex items-center gap-2 text-sm font-medium">
+            <span className="inline-flex items-center gap-2 opacity-100 group-hover/feature:opacity-0 transition-opacity duration-200">
+              Access Tool
+              <ArrowRight className="h-4 w-4" />
+            </span>
+            <span className="absolute left-0 top-0 inline-flex items-center gap-2 opacity-0 group-hover/feature:opacity-100 transition-opacity duration-200 group-hover/feature:underline">
+              Login to Access
+              <ArrowRight className="h-4 w-4" />
+            </span>
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-2 text-sm font-medium hover:underline">
+            {cta}
+            <ArrowRight className="h-4 w-4" />
+          </span>
+        )}
+      </div>
+    </>
   );
 
+  const cardClassName = cn(
+    "flex flex-col lg:border-r py-10 relative group/feature border-[var(--border)]",
+    (index === 0 || index % 4 === 0) && "lg:border-l border-[var(--border)]",
+    index < 4 && "lg:border-b border-[var(--border)]",
+    !isDisabled && "cursor-pointer",
+    isDisabled && "cursor-default opacity-80"
+  );
+
+  if (isDisabled) {
+    return <div className={cardClassName}>{content}</div>;
+  }
+
   return (
-    <BentoCard
-      name={tool.title}
-      description={tool.description ?? ""}
-      href={path}
-      cta={cta}
-      Icon={Icon}
-      background={<BentoCardBackground />}
-      className="col-span-1"
-      ctaContent={ctaContent}
-      disabled={isDisabled}
-    />
+    <Link href={href} onClick={handleClick} className={cardClassName}>
+      {content}
+    </Link>
   );
 }
 
@@ -144,10 +132,10 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
   return (
     <section
       id="tools"
-      className="py-16 md:py-24 text-[var(--foreground)]"
+      className="text-[var(--foreground)]"
       aria-labelledby="tools-heading"
     >
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
         <header className="text-center mb-14 md:mb-18">
           <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--card)]/50 px-4 py-2 text-sm font-medium text-[var(--muted-foreground)] mb-6">
             <Sparkles className="h-4 w-4 text-[var(--primary)]" />
@@ -164,22 +152,26 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
           </p>
         </header>
 
-        {/* NEW TOOLS – Bento Grid */}
+        {/* NEW TOOLS – Hover effects grid */}
         {tools && tools.length > 0 && (
-          <div className="mb-16">
-            <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[22rem] gap-6">
-              {tools.map((tool) => (
-                <ToolBentoCard
-                  key={tool.id ?? tool.title}
-                  tool={tool}
-                  loginRequired={!LoginNotRequiredList.includes(tool.title)}
-                />
-              ))}
-            </BentoGrid>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10 mb-16">
+            {tools.map((tool, index) => (
+              <ToolCard
+                key={tool.id ?? tool.title}
+                title={tool.title}
+                description={tool.description ?? ""}
+                icon={tool.icon}
+                path={tool.path ?? "#"}
+                loginRequired={!LoginNotRequiredList.includes(tool.title)}
+                status={tool.status}
+                index={index}
+                badge={tool.status !== "Available" ? "Coming Soon" : undefined}
+              />
+            ))}
           </div>
         )}
 
-        {/* LEGACY TOOLS – Bento Grid */}
+        {/* LEGACY TOOLS – Hover effects grid */}
         {oldTools && oldTools.length > 0 && (
           <div className="mb-16">
             <div className="flex flex-wrap items-center gap-3 mb-8">
@@ -190,15 +182,20 @@ const ToolsSection: React.FC<ToolsSectionProps> = ({ tools, oldTools }) => {
                 For annotators only
               </span>
             </div>
-            <BentoGrid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-[22rem] gap-6">
-              {oldTools.map((tool) => (
-                <OldToolBentoCard
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 py-10">
+              {oldTools.map((tool, index) => (
+                <ToolCard
                   key={tool.id ?? tool.title}
-                  tool={tool}
+                  title={tool.title}
+                  description={tool.description ?? ""}
+                  icon={tool.icon}
+                  path={`/tools/${encodeURIComponent(tool.title)}`}
                   loginRequired={!LoginNotRequiredList.includes(tool.title)}
+                  status="Available"
+                  index={index}
                 />
               ))}
-            </BentoGrid>
+            </div>
           </div>
         )}
 

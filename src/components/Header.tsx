@@ -45,7 +45,7 @@ const Header: React.FC = () => {
             className="rounded-lg object-contain"
           />
           <span className="text-xl font-semibold tracking-tight text-[var(--foreground)] group-hover:opacity-90 transition-opacity">
-            Buddhist AI Studio
+            WeBuddhist AI Studio
           </span>
         </Link>
         {/* Desktop Navigation */}

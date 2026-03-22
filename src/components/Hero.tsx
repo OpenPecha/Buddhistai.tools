@@ -60,7 +60,7 @@ const Hero = () => {
       className="relative flex flex-col bg-transparent overflow-hidden"
       aria-labelledby="hero-heading"
     >
-      <div className="flex flex-col overflow-hidden pb-[200px]">
+      <div className="flex flex-col overflow-hidden">
         <ContainerScroll
           titleComponent={
             <>
