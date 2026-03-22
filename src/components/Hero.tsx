@@ -88,7 +88,7 @@ const Hero = () => {
             alt="Buddhist heritage—temple and tradition"
             height={720}
             width={1400}
-            className="mx-auto , rounded-2xl object-contain h-full object-center"
+            className="mx-auto rounded-3xl object-contain h-full bg-gray-100"
             draggable={false}
             priority
           />
